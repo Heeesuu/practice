@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{usr/layout/layout.html}">
+<head>
+  <title>Article Detail</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="article-detail">
+    <!-- 사용자 정보 영역 -->
+    <div class="user-info flex items-center mb-4">
+      <!-- 프로필 사진 -->
+      <div class="profile-pic mr-2">
+        <img src="/images/default-profile-pic.png" alt="User Image" class="w-24 h-24" />
+      </div>
+      <!-- 사용자 이름 -->
+      <div class="username text-lg font-bold">
+<!--        <span th:text="${article.username}"></span>-->
+        사용자이름
+      </div>
+      <!-- 생성 시간 -->
+      <div class="create-datetime text-sm text-gray-600 ml-2">
+        <span th:text="${#temporals.format(article.createDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+      </div>
+    </div>
+
+    <!-- 게시글 내용 영역 -->
+    <div class="article-content">
+      <!-- 제목 -->
+      <h2 class="title text-2xl font-bold mb-4">
+        <span th:text="${article.title}"></span>
+      </h2>
+      <!-- 게시글 이미지 -->
+      <div class="article-image mb-4">
+        <img src="/images/default-profile-pic.png" alt="Article Image" class="w-full h-64" />
+      </div>
+      <!-- 내용 -->
+      <div class="content text-base">
+        <span th:text="${article.content}"></span>
+      </div>
+    </div>
+
+    <!-- 상호작용 영역 (좋아요) -->
+    <div class="interaction mt-4 flex items-center">
+      <div class="like">
+        <span class="heart-icon text-red-500 mr-1">❤️</span>
+        좋아요 숫자
+<!--        <span th:text="${article.likes}"></span>-->
+      </div>
+    </div>
+
+    <!-- 목록으로 돌아가기 버튼 -->
+    <div class="back-to-list mt-4">
+      <a href="/article/list" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">목록으로</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
