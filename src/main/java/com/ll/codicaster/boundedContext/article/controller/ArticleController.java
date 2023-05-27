@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,12 +31,11 @@ public class ArticleController {
 
 
 	@PostMapping("/writepro")
-	public String articleWriteSave(ArticleCreateForm articleCreateForm) {
-
+	public String articleWriteSave(@ModelAttribute ArticleCreateForm articleCreateForm) {
 		articleService.saveArticle(articleCreateForm);
-
 		return "redirect:/article/list";
 	}
+
 
 
 	@GetMapping("/list")
