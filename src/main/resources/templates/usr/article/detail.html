@@ -5,36 +5,39 @@
 </head>
 <body>
 <div layout:fragment="content">
-  <div class="article-detail">
+  <div class="article-detail ml-4" > <!-- <- 여기에 ml-4 추가 -->
     <!-- 사용자 정보 영역 -->
-    <div class="user-info flex items-center mb-4">
+    <div class="user-info flex items-start mb-4">
       <!-- 프로필 사진 -->
       <div class="profile-pic mr-2">
         <img src="/images/default-profile-pic.png" alt="User Image" class="w-24 h-24" />
       </div>
-      <!-- 사용자 이름 -->
-      <div class="username text-lg font-bold">
-<!--        <span th:text="${article.username}"></span>-->
-        사용자이름
-      </div>
-      <!-- 생성 시간 -->
-      <div class="create-datetime text-sm text-gray-600 ml-2">
-        <span th:text="${#temporals.format(article.createDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+      <!-- 사용자 이름 및 생성 시간 -->
+      <div class="username-and-date">
+        <!-- 사용자 이름 -->
+        <div class="username text-lg font-bold">
+          <!--          <span th:text="${article.username}"></span>-->
+          사용자이름
+        </div>
+        <!-- 생성 시간 -->
+        <div class="create-datetime text-sm text-gray-600 ml-2">
+          <span th:text="${#temporals.format(article.createDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+        </div>
       </div>
     </div>
 
     <!-- 게시글 내용 영역 -->
-    <div class="article-content">
+    <div class="article-content text-center">
       <!-- 제목 -->
-      <h2 class="title text-2xl font-bold mb-4">
+      <h2 class="title text-2xl font-bold mb-2">
         <span th:text="${article.title}"></span>
       </h2>
       <!-- 게시글 이미지 -->
-      <div class="article-image mb-4">
-        <img src="/images/default-profile-pic.png" alt="Article Image" class="w-full h-64" />
+      <div class="article-image mb-2 relative flex justify-center items-center" style="padding-top: 5%;">
+        <img src="/images/default-profile-pic.png" alt="Article Image" class="object-scale-down" />
       </div>
       <!-- 내용 -->
-      <div class="content text-base">
+      <div class="content text-base" style="padding-top: 5%;">
         <span th:text="${article.content}"></span>
       </div>
     </div>
@@ -44,7 +47,7 @@
       <div class="like">
         <span class="heart-icon text-red-500 mr-1">❤️</span>
         좋아요 숫자
-<!--        <span th:text="${article.likes}"></span>-->
+        <!--        <span th:text="${article.likes}"></span>-->
       </div>
     </div>
 
