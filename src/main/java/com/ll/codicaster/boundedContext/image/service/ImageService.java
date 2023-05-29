@@ -1,6 +1,8 @@
 package com.ll.codicaster.boundedContext.image.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.ll.codicaster.boundedContext.image.repository.ImageRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -11,4 +13,7 @@ public class ImageService {
 
 	private final ImageRepository imageRepository;
 
+	public void saveImage(MultipartFile imageFile) {
+
+	}
 }

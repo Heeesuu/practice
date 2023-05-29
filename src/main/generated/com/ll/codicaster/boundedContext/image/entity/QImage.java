@@ -24,9 +24,11 @@ public class QImage extends EntityPathBase<Image> {
 
     public final com.ll.codicaster.boundedContext.article.entity.QArticle article;
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
+    public final StringPath filename = createString("filename");
 
-    public final StringPath path = createString("path");
+    public final StringPath filepath = createString("filepath");
+
+    public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public QImage(String variable) {
         this(Image.class, forVariable(variable), INITS);

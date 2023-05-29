@@ -6,12 +6,12 @@
 <body>
 <div layout:fragment="content">
   <div class="layout" th:style="'width: 500px; margin: 0 auto;'">
-  <form th:action="@{/article/writepro}" method="post">
-    <input name="title" type="text" th:style="'width: 100%; box-sizing: border-box;border: 1px solid #ccc;'">
-    <textarea name="content" th:style="'width: 100%; margin-top: 10px; min-height: 300px; border: 1px solid #ccc;'"></textarea>
-    <input type="file" name="imageFile">
-    <button type="submit">작성</button>
-  </form>
+    <form th:action="@{/article/writepro}" method="post" enctype="multipart/form-data">
+      <input name="title" type="text" th:style="'width: 100%; box-sizing: border-box;border: 1px solid #ccc;'">
+      <textarea name="content" th:style="'width: 100%; margin-top: 10px; min-height: 300px; border: 1px solid #ccc;'"></textarea>
+      <input type="file" name="imageFile">
+      <button type="submit">작성</button>
+    </form>
   </div>
 </div>
 </body>

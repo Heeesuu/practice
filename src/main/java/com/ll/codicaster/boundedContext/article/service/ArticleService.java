@@ -1,16 +1,19 @@
 package com.ll.codicaster.boundedContext.article.service;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ll.codicaster.boundedContext.article.entity.Article;
 import com.ll.codicaster.boundedContext.article.form.ArticleCreateForm;
 import com.ll.codicaster.boundedContext.article.repository.ArticleRepository;
+import com.ll.codicaster.boundedContext.image.entity.Image;
+import com.ll.codicaster.boundedContext.image.repository.ImageRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,8 +22,9 @@ import lombok.RequiredArgsConstructor;
 public class ArticleService {
 
 	private final ArticleRepository articleRepository;
+	private final ImageRepository imageRepository;
 
-	public void saveArticle(ArticleCreateForm form) {
+	public void saveArticle(ArticleCreateForm form, MultipartFile imageFile) throws Exception {
 		Article article = Article.builder()
 			.title(form.getTitle())
 			.content(form.getContent())
@@ -29,7 +33,28 @@ public class ArticleService {
 			.build();
 
 		articleRepository.save(article);
+
+		// 이미지 파일이 있으면 저장
+		if (!imageFile.isEmpty()) {
+			String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images";
+			UUID uuid = UUID.randomUUID();
+			String fileName = uuid + "_" + imageFile.getOriginalFilename();
+			File saveFile = new File(projectPath, fileName);  // 'filename' 대신 fileName을 사용해야 합니다.
+			imageFile.transferTo(saveFile);
+
+			// 이미지 정보를 설정하고 저장합니다.
+			Image image = new Image();
+			image.setFilename(fileName);
+			image.setFilepath("/images/" + fileName);
+			image.setArticle(article);  // Image 객체와 Article 객체를 연결합니다.
+
+			image = imageRepository.save(image);  // 이미지를 DB에 저장
+
+			article.setImage(image); // 이미지 정보를 게시글에 추가
+		}
+
 	}
+
 
 	public List<Article> articleList() {
 
