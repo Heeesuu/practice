@@ -39,14 +39,14 @@ public class ArticleService {
 			String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images";
 			UUID uuid = UUID.randomUUID();
 			String fileName = uuid + "_" + imageFile.getOriginalFilename();
-			File saveFile = new File(projectPath, fileName);  // 'filename' 대신 fileName을 사용해야 합니다.
+			File saveFile = new File(projectPath, fileName);
 			imageFile.transferTo(saveFile);
 
-			// 이미지 정보를 설정하고 저장합니다.
+			// 이미지 정보를 설정하고 저장.
 			Image image = new Image();
 			image.setFilename(fileName);
 			image.setFilepath("/images/" + fileName);
-			image.setArticle(article);  // Image 객체와 Article 객체를 연결합니다.
+			image.setArticle(article);  // Image 객체와 Article 객체를 연결
 
 			image = imageRepository.save(image);  // 이미지를 DB에 저장
 

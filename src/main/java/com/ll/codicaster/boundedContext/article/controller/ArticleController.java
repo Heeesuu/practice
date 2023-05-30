@@ -58,7 +58,9 @@ public class ArticleController {
 	public String articleDetail(@PathVariable Long id, Model model) {
 		Article article = articleService.articleDetail(id);
 		model.addAttribute("article", article);
+		model.addAttribute("image", article.getImage()); // image 정보를 추가해줍니다.
 		return "usr/article/detail";
 	}
-
 }
+
+

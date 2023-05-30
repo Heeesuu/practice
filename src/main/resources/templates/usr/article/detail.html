@@ -34,8 +34,9 @@
       </h2>
       <!-- 게시글 이미지 -->
       <div class="article-image mb-2 relative flex justify-center items-center" style="padding-top: 5%;">
-        <img src="/images/default-profile-pic.png" alt="Article Image" class="object-scale-down" />
+        <img th:src="${image.filepath}" alt="Article Image" class="object-scale-down" />
       </div>
+
       <!-- 내용 -->
       <div class="content text-base" style="padding-top: 5%;">
         <span th:text="${article.content}"></span>
