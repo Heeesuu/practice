@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{usr/layout/layout.html}">
+<head>
+  <title>Modify an Article</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="layout" th:style="'width: 500px; margin: 0 auto;'">
+    <form th:action="@{/article/modify/{id}(id=${article.id})}" th:object="${article}" method="post" enctype="multipart/form-data">
+      <input type="text" th:field="*{title}" th:style="'width: 100%; box-sizing: border-box;border: 1px solid #ccc;'">
+      <textarea th:field="*{content}" th:style="'width: 100%; margin-top: 10px; min-height: 300px; border: 1px solid #ccc;'"></textarea>
+      <input type="file" name="imageFile">
+      <p th:if="${article.image != null}">Current Image: <img th:src="@{${article.image.filepath}}" alt="Article Image"></p>
+      <button type="submit">수정</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

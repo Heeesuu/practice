@@ -62,58 +62,52 @@ public class ArticleController {
 		return "usr/article/detail";
 	}
 
-	// @GetMapping("/modify/{id}")
-	// public String modifyArticle(@PathVariable("id") Long id, Model model) {
-	// 	// id를 이용하여 기존 게시물 정보를 가져옵니다.
-	// 	// 예를 들어, ArticleService를 이용하여 DB에서 게시물을 찾습니다.
-	//
-	// 	Article article = articleService.findArticleById(id);
-	//
-	// 	if (article == null) {
-	// 		// 게시물을 찾지 못한 경우 처리를 작성합니다.
-	// 		// 예를 들어, 오류 페이지로 리다이렉트 시킬 수 있습니다.
-	// 		return "redirect:/error";
-	// 	}
-	//
-	// 	model.addAttribute("article", article);
-	//
-	// 	// 수정 페이지를 반환합니다.
-	// 	return "article/modify";
-	// }
-	//
-	// @PostMapping("/modify/{id}")
-	// public String updateArticle(@PathVariable("id") Long id, @ModelAttribute("article") Article updatedArticle) {
-	// 	// id를 이용하여 기존 게시물 정보를 업데이트합니다.
-	// 	// 예를 들어, ArticleService를 이용하여 DB에 저장된 게시물을 수정합니다.
-	//
-	// 	boolean success = articleService.updateArticle(id, updatedArticle);
-	//
-	// 	if (!success) {
-	// 		// 게시물을 업데이트하지 못한 경우 처리를 작성합니다.
-	// 		// 예를 들어, 오류 페이지로 리다이렉트 시킬 수 있습니다.
-	// 		return "redirect:/error";
-	// 	}
-	//
-	// 	// 수정이 성공적으로 이루어진 경우, 해당 게시물로 리다이렉트합니다.
-	// 	return "redirect:/article/detail/" + id;
-	// }
-	//
-	// @GetMapping("/delete/{id}")
-	// public String deleteArticle(@PathVariable("id") Long id) {
-	// 	// id를 이용하여 게시물을 삭제합니다.
-	// 	// 예를 들어, ArticleService를 이용하여 DB에서 게시물을 삭제합니다.
-	//
-	// 	boolean success = articleService.deleteArticle(id);
-	//
-	// 	if (!success) {
-	// 		// 게시물을 삭제하지 못한 경우 처리를 작성합니다.
-	// 		// 예를 들어, 오류 페이지로 리다이렉트 시킬 수 있습니다.
-	// 		return "redirect:/error";
-	// 	}
-	//
-	// 	// 게시물 삭제가 성공적으로 이루어진 경우, 게시물 목록으로 리다이렉트합니다.
-	// 	return "redirect:/article/list";
-	// }
+	@GetMapping("/modify/{id}")
+	public String modifyArticle(@PathVariable("id") Long id, Model model) {
+		// id를 이용하여 기존 게시물 정보를 가져옵니다.
+		// 예를 들어, ArticleService를 이용하여 DB에서 게시물을 찾습니다.
+
+		Article article = articleService.findArticleById(id);
+
+		if (article == null) {
+			// 게시물을 찾지 못한 경우 처리를 작성합니다.
+			// 예를 들어, 오류 페이지로 리다이렉트 시킬 수 있습니다.
+			return "redirect:/error";
+		}
+
+		model.addAttribute("article", article);
+
+		// 수정 페이지를 반환합니다.
+		return "usr/article/modify";
+	}
+
+	@PostMapping("/modify/{id}")
+	public String updateArticle(@PathVariable("id") Long id, @ModelAttribute ArticleCreateForm updatedArticle, MultipartFile imageFile) {
+		boolean success = articleService.updateArticle(id, updatedArticle, imageFile);
+
+		if (!success) {
+			return "redirect:/error";
+		}
+
+		return "redirect:/article/detail/" + id;
+	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteArticle(@PathVariable("id") Long id) {
+		// id를 이용하여 게시물을 삭제합니다.
+		// 예를 들어, ArticleService를 이용하여 DB에서 게시물을 삭제합니다.
+
+		boolean success = articleService.deleteArticle(id);
+
+		if (!success) {
+			// 게시물을 삭제하지 못한 경우 처리를 작성합니다.
+			// 예를 들어, 오류 페이지로 리다이렉트 시킬 수 있습니다.
+			return "redirect:/error";
+		}
+
+		// 게시물 삭제가 성공적으로 이루어진 경우, 게시물 목록으로 리다이렉트합니다.
+		return "redirect:/article/list";
+	}
 
 
 }
