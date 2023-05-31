@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,8 +40,6 @@ public class Article {
 
 	@OneToOne(mappedBy = "article", cascade = CascadeType.ALL)
 	private Image image;
-
-
 
 
 	//ManyToMany 태그리스트와 연결

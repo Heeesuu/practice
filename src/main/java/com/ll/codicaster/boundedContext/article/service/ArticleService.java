@@ -98,7 +98,20 @@ public class ArticleService {
 				File saveFile = new File(projectPath, fileName);
 				imageFile.transferTo(saveFile);
 
-				// 이미지 정보를 설정하고 저장합니다.
+				// 기존 이미지가 있으면 삭제합니다.
+				Image oldImage = article.getImage();
+				if (oldImage != null) {
+					// 실제 파일 삭제
+					File oldFile = new File(projectPath, oldImage.getFilename());
+					if (oldFile.exists()) {
+						oldFile.delete();
+					}
+
+					// DB에서 기존 이미지 삭제
+					imageRepository.delete(oldImage);
+				}
+
+				// 새 이미지 정보를 설정하고 저장합니다.
 				Image image = new Image();
 				image.setFilename(fileName);
 				image.setFilepath("/images/" + fileName);
