@@ -14,11 +14,6 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
-  web:
-    resources:
-      static-locations:
-        - 'classpath:/static/'
-        - 'file:///C:/Users/82102/IdeaProjects/CodiCaster-main/src/main/resources/static/'
 logging:
   level:
     root: INFO

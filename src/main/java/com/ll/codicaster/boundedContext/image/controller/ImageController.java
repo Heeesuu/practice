@@ -19,20 +19,20 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class ImageController {
-	@GetMapping("/images/{filename}")
-	public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
-		try {
-			Path filepath = Paths.get("/your/upload/directory/" + filename);
-			Resource resource = new UrlResource(filepath.toUri());
-			if (resource.exists() || resource.isReadable()) {
-				return ResponseEntity.ok().body(resource);
-			} else {
-				// 파일이 없거나 읽을 수 없는 경우의 처리
-			}
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			// 예외 처리 로직 추가
-		}
-		return ResponseEntity.notFound().build();
-	}
+	// @GetMapping("/images/{filename}")
+	// public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
+	// 	try {
+	// 		Path filepath = Paths.get("/your/upload/directory/" + filename);
+	// 		Resource resource = new UrlResource(filepath.toUri());
+	// 		if (resource.exists() || resource.isReadable()) {
+	// 			return ResponseEntity.ok().body(resource);
+	// 		} else {
+	// 			// 파일이 없거나 읽을 수 없는 경우의 처리
+	// 		}
+	// 	} catch (MalformedURLException e) {
+	// 		e.printStackTrace();
+	// 		// 예외 처리 로직 추가
+	// 	}
+	// 	return ResponseEntity.notFound().build();
+	// }
 }

@@ -36,9 +36,16 @@ public class ArticleService {
 
 		// 이미지 파일이 있으면 저장
 		if (!imageFile.isEmpty()) {
-			String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images";
+			String projectPath = "C:/Users/82102/IdeaProjects/CodiCaster-main/images";
 			UUID uuid = UUID.randomUUID();
 			String fileName = uuid + "_" + imageFile.getOriginalFilename();
+
+			File directory = new File(projectPath);
+			// 디렉토리가 존재하지 않으면 생성
+			if (!directory.exists()) {
+				directory.mkdirs(); // 상위 디렉토리까지 모두 생성
+			}
+
 			File saveFile = new File(projectPath, fileName);
 			imageFile.transferTo(saveFile);
 
