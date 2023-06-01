@@ -50,7 +50,7 @@ public class ArticleService {
 			File saveFile = new File(projectPath, fileName);
 			imageFile.transferTo(saveFile);
 
-			// 이미지 정보를 설정하고 저장.
+
 			Image image = new Image();
 			image.setFilename(fileName);
 			image.setFilepath("/images/" + fileName);
@@ -79,12 +79,12 @@ public class ArticleService {
 		try {
 			Article article = articleRepository.findById(id).orElseThrow(() -> new NoSuchElementException("No Article found with id: " + id));
 
-			// 게시글의 정보를 수정합니다.
+			// 게시글의 정보를 수정
 			article.setTitle(form.getTitle());
 			article.setContent(form.getContent());
 			article.setModifyDate(LocalDateTime.now());
 
-			// 이미지 파일이 있으면 저장합니다.
+			// 이미지 파일이 있으면 저장
 			if (!imageFile.isEmpty()) {
 				String projectPath = "C:/Users/82102/IdeaProjects/CodiCaster-main/images";
 				UUID uuid = UUID.randomUUID();
@@ -98,7 +98,7 @@ public class ArticleService {
 				File saveFile = new File(projectPath, fileName);
 				imageFile.transferTo(saveFile);
 
-				// 기존 이미지가 있으면 삭제합니다.
+				// 기존 이미지가 있으면 삭제
 				Image oldImage = article.getImage();
 				if (oldImage != null) {
 					// 실제 파일 삭제
@@ -111,21 +111,19 @@ public class ArticleService {
 					imageRepository.delete(oldImage);
 				}
 
-				// 새 이미지 정보를 설정하고 저장합니다.
+				// 새 이미지 정보를 설정하고 저장
 				Image image = new Image();
 				image.setFilename(fileName);
 				image.setFilepath("/images/" + fileName);
-				image.setArticle(article);  // Image 객체와 Article 객체를 연결
+				image.setArticle(article);
 
-				image = imageRepository.save(image);  // 이미지를 DB에 저장
+				image = imageRepository.save(image);
 
-				// 이미지 정보를 게시글에 추가합니다.
 				article.setImage(image);
 			}
 
 			return true;
 		} catch (Exception e) {
-			// 예외 처리를 적절히 합니다.
 			// e.printStackTrace();
 			return false;
 		}
@@ -137,7 +135,6 @@ public class ArticleService {
 			articleRepository.deleteById(id);
 			return true;
 		} catch (Exception e) {
-			// 예외 처리를 적절히 합니다.
 			// e.printStackTrace();
 			return false;
 		}
